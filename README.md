@@ -11,6 +11,11 @@ This repository contains two Python scripts that allow for Modbus TCP communicat
 - **Threaded Execution**: The scripts use Python's `ThreadPoolExecutor` to efficiently handle multiple Modbus requests in parallel, making them suitable for querying multiple registers or devices simultaneously.
 - **Customizable via Command Line Arguments**: Each script provides a range of command-line arguments for specifying Modbus registers, IP addresses, ports, and more.
 
+## Real use case
+![kkmodbusbanner](egc6.jpeg)
+
+In the context of Exercise Guardião Cibernético 6.0, the use of this tool played a crucial role in the virtual simulations of critical infrastructures. Extensively employed by the Red Teams, the tool was instrumental in conducting simulated attacks, enabling the creation of realistic scenarios that challenged the defense teams. These simulations allowed the Red Teams to accurately replicate cyber threats, testing the protection and response capabilities of infrastructures in strategic sectors such as energy, communications, and water. The tool's robustness and versatility provided a safe and controlled environment for executing complex attacks, significantly contributing to the training and enhancement of the cyber defense teams' skills, ultimately raising the level of readiness and resilience of the institutions involved.
+
 ---
 
 # Script 1: `kkmodbus-enum.py`
