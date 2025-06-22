@@ -10,6 +10,27 @@ import argparse
 import threading
 from concurrent.futures import ThreadPoolExecutor
 
+
+def recv_all(sock, length):
+    """Receive exactly ``length`` bytes from a socket."""
+    data = b""
+    while len(data) < length:
+        chunk = sock.recv(length - len(data))
+        if not chunk:
+            break
+        data += chunk
+    return data
+
+
+def receive_response(sock):
+    """Receive a complete Modbus TCP response."""
+    header = recv_all(sock, 7)
+    if len(header) < 7:
+        return b""
+    _, _, length = struct.unpack('>HHH', header[:6])
+    body = recv_all(sock, length)
+    return header + body
+
 def build_modbus_request(trans_id, unit_id, function_code, address, value=None, count=1):
     protocol_id = 0
     if value is not None:
@@ -57,7 +78,7 @@ def read_or_write_data(ip, port, unit_id, function_code, protocol_address, logic
             return
 
         sock.sendall(request)
-        response = sock.recv(1024)
+        response = receive_response(sock)
         data = parse_modbus_response(response)
         sock.close()
 
